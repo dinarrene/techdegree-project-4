@@ -97,8 +97,8 @@ class Game {
             let div = document.getElementById('overlay');
             let h1 = document.getElementById('game-over-message');
             div.removeAttribute('style');
-            div.style.backgroundColor = 'rgb(191,27,6)';
-            h1.innerText = 'Game Over. Try Again!'
+            div.setAttribute('class', 'lose');
+            h1.innerText = 'Game Over. Try Again!';
         } 
     };
     
@@ -111,8 +111,8 @@ class Game {
         let div = document.getElementById('overlay');
         let h1 = document.getElementById('game-over-message');
         div.removeAttribute('style');
-        div.style.backgroundColor = 'rgb(232, 206, 5)';
-        h1.innerText = 'Congrats! You Won!'
+        div.setAttribute('class', 'win');
+        h1.innerText = 'Congrats! You Won!';
     }
 
     /**
