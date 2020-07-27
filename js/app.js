@@ -27,24 +27,26 @@ keyboard.addEventListener('click', (e) => {
     }
 });
 
-document.addEventListener('keydown', (e) => {
-    let allKeys = document.querySelectorAll('.key');
-    let button = e.key;
-    console.log(button);
+let disabledKeys = [];
 
-    for(let i = 0; i < allKeys.length; i++) {
-        if(button === allKeys[i].textContent) {
-            button = allKeys[i];
+document.addEventListener('keydown', (e) => {
+    let pressedKey = e.key;
+    let keys = document.querySelectorAll('.keyrow button');
+    let button;
+
+    for(let i = 0; i < keys.length; i++){
+        if(!disabledKeys.includes(pressedKey) && pressedKey === keys[i].textContent) {
+            disabledKeys.push(pressedKey);
+            button = keys[i];
         }
     }
-
-    if(button.code === 13 || button.code === 'Enter') {
-        startButton.click();
-    }
-
+ 
+    console.log(button);
+    console.log(disabledKeys);
 
     game.handleInteraction(button);
 
 
+    
 });
 

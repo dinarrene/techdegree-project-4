@@ -31,7 +31,6 @@ class Game {
     getRandomPhrase() {
         let randNum = Math.floor(Math.random() * this.phrases.length);
         let randomPhrase = this.phrases[randNum]; 
-        this.activePhrase = randomPhrase;
         return randomPhrase;
     };
 
@@ -42,7 +41,8 @@ class Game {
     startGame() { 
         this.resetGame()   
         document.getElementById('overlay').style.display = 'none'; 
-        this.getRandomPhrase().addPhraseToDisplay();
+        this.activePhrase = this.getRandomPhrase();
+        this.activePhrase.addPhraseToDisplay();
         
     };
 
@@ -94,11 +94,7 @@ class Game {
         hearts[this.missed].innerHTML = '<img src="images/lostHeart.png" alt="Heart Icon" height="35" width="30">'
         this.missed += 1; 
         if(game.missed === 5) {
-            let div = document.getElementById('overlay');
-            let h1 = document.getElementById('game-over-message');
-            div.removeAttribute('style');
-            div.setAttribute('class', 'lose');
-            h1.innerText = 'Game Over. Try Again!';
+            this.gameOver(false);
         } 
     };
     
@@ -110,9 +106,15 @@ class Game {
     gameOver(gameWon) {
         let div = document.getElementById('overlay');
         let h1 = document.getElementById('game-over-message');
-        div.removeAttribute('style');
-        div.setAttribute('class', 'win');
-        h1.innerText = 'Congrats! You Won!';
+        if(gameWon) {
+            div.removeAttribute('style');
+            div.setAttribute('class', 'win');
+            h1.innerText = 'Congrats! You Won!';
+        } else {
+            div.removeAttribute('style');
+            div.setAttribute('class', 'lose');
+            h1.innerText = 'Game Over. Try Again!';
+        }
     }
 
     /**
@@ -127,9 +129,8 @@ class Game {
         } else {
             button.setAttribute('class', 'chosen');
             this.activePhrase.showMatchedLetter(button.textContent);
-            this.checkForWin();
             if(this.checkForWin()) {
-                this.gameOver();
+                this.gameOver(true);
             }
         }
     };
