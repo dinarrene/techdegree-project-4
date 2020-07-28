@@ -9,12 +9,10 @@ class Game {
       this.activePhrase = null;
     }
 
-
     /**
      * Creates phrases for use in game
      * @return {array} An array of phrases that could be used in the game
      */
-
     createPhrases() {
         let phrases = ['Paint the town red', 'Cut to the chase', 'Go for the gold', 'Bite the bullet', 'Call it a day'];
         
@@ -27,7 +25,6 @@ class Game {
     * Selects random phrase from phrases property
     * @return {Object} Phrase object chosen to be used
     */
-
     getRandomPhrase() {
         let randNum = Math.floor(Math.random() * this.phrases.length);
         let randomPhrase = this.phrases[randNum]; 
@@ -42,8 +39,7 @@ class Game {
         this.resetGame()   
         document.getElementById('overlay').style.display = 'none'; 
         this.activePhrase = this.getRandomPhrase();
-        this.activePhrase.addPhraseToDisplay();
-        
+        this.activePhrase.addPhraseToDisplay();       
     };
 
 
@@ -66,7 +62,6 @@ class Game {
         for(let i = 0; i < hearts.length; i++) {
             hearts[i].innerHTML = '<img src="images/liveHeart.png" alt="Heart Icon" height="35" width="30">'
         }
-
     }
         
 
@@ -84,7 +79,7 @@ class Game {
         }
    };
 
-   /**
+    /**
     * Increases the value of the missed property
     * Removes a life from the scoreboard
     * Checks if player has remaining lives and ends game if player is out
